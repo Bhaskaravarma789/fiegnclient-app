@@ -1,0 +1,42 @@
+server:
+ port: 3333
+spring:
+ application:
+   name: API-GATEWAY
+ cloud:
+   gateway:
+     discovery:
+       locator:
+            enabled: true
+            lower-case-service-id: true
+            
+            
+     routes:
+     - id: Postticket
+       uri: lb://MAKEMYTRIP-API
+       predicates:
+        - Path= /mtm/bookTicket4me 
+     
+     
+     - id: getAlltickets
+       uri: lb://MAKEMYTRIP-API
+       predicates:
+        - Path= /mtm/getAllTickets
+        
+       
+     - id: deletetickets
+       uri: lb://MAKEMYTRIP-API
+       predicates:
+        - Path= /mtm/deleteTicket/{id}
+        
+     - id: getByidTickets
+       uri: lb://MAKEMYTRIP-API
+       predicates:
+        - Path= /mtm/getTicket/{id}
+        
+     - id: PutTicket
+       uri: lb://MAKEMYTRIP-API
+       predicates:
+        - Path= /mtm/updateTicket/{id}
+        
+        
